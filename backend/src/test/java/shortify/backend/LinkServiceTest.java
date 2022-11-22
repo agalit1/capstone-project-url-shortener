@@ -3,7 +3,6 @@ package shortify.backend;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -23,7 +22,7 @@ public class LinkServiceTest {
         //When
 
         when(linkRepository.findAll()).thenReturn(links);
-        List<Link> actual =linkRepository.findAll();
+        List<Link> actual = linkRepository.findAll();
 
         //Then
 
