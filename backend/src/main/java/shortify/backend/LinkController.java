@@ -1,8 +1,7 @@
 package shortify.backend;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -15,5 +14,10 @@ public class LinkController {
     @GetMapping
     public List<Link> getLinks() {
         return linkService.getLinks();
+    }
+
+    @PostMapping
+    public Link insertLink(@RequestBody Link link) {
+        return linkService.insertLink(link);
     }
 }

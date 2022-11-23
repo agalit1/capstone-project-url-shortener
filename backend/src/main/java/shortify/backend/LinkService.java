@@ -15,4 +15,8 @@ public class LinkService {
     public List<Link> getLinks() {
         return linkRepository.findAll();
     }
+
+    public Link insertLink(Link link) {
+        return linkRepository.save(link);
+    }
 }
