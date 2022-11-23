@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {LinkModel} from "./LinkModel";
 import axios from "axios";
 
-function GetLink() {
+function LinkCard() {
 
     const [links, setLinks] = useState<LinkModel[]>([]);
 
@@ -12,11 +12,10 @@ function GetLink() {
 
     const fetchAllLinks = () => {
         axios.get("/api/links")
-            .then(response => response.data)
-            .catch((error) => console.log("Endpoint not available " + error))
-            .then((data) => {
-                setLinks(data)
+            .then((response) => {
+                setLinks(response.data);
             })
+            .catch((error) => console.log("Endpoint not available " + error))
     }
 
     const linkList = links.map((current) =>
@@ -24,8 +23,8 @@ function GetLink() {
     )
 
     return <>
-        <h4>List of links:</h4>
+        <h4>MyUrls:</h4>
         <ul>{linkList}</ul>
     </>
 }
-export default GetLink;
+export default LinkCard;
