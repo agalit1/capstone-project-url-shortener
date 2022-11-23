@@ -24,7 +24,7 @@ function GetLink() {
     )
 
     return <>
-        <h1>List of links:</h1>
+        <h4>List of links:</h4>
         <ul>{linkList}</ul>
     </>
 }
