@@ -1,6 +1,7 @@
 import './App.css';
 import GetLink from "./GetLink";
 import {Route, BrowserRouter, Routes} from "react-router-dom";
+import PostLink from "./PostLink";
 
 function App() {
 
@@ -8,7 +9,7 @@ function App() {
         <div>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<GetLink/>}/>
+                <Route path='/' element={<><PostLink/> <GetLink/></>} />
             </Routes>
         </BrowserRouter>
     </div>
