@@ -1,7 +1,6 @@
-import './App.css';
+import './Styling/App.css';
 import LinkCard from "./LinkCard";
 import {Route, BrowserRouter, Routes} from "react-router-dom";
-import PostLink from "./PostLink";
 
 function App() {
 
@@ -9,7 +8,7 @@ function App() {
         <div>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' element={<><PostLink/> <LinkCard/></>}/>
+                    <Route path='/' element={<LinkCard/>}/>
                 </Routes>
             </BrowserRouter>
         </div>
