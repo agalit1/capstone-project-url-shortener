@@ -16,7 +16,8 @@ public class LinkService {
         return linkRepository.findAll();
     }
 
-    public Link insertLink(Link link) {
+    public Link insertLink(NewLink newLink) {
+        Link link = new Link(newLink.link(), new IdGenerator().generateId());
         return linkRepository.save(link);
     }
 }
