@@ -1,6 +1,7 @@
 package shortify.backend;
 
 public record Link(
-        String link
+        String link,
+        String id
 ) {
 }

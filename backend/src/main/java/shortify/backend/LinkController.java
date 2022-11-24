@@ -17,7 +17,7 @@ public class LinkController {
     }
 
     @PostMapping
-    public Link insertLink(@RequestBody Link link) {
-        return linkService.insertLink(link);
+    public Link insertLink(@RequestBody NewLink newLink) {
+        return linkService.insertLink(newLink);
     }
 }
