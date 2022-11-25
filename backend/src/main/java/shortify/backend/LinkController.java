@@ -2,6 +2,7 @@ package shortify.backend;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class LinkController {
     }
 
     @PostMapping
-    public Link insertLink(@RequestBody NewLink newLink) {
+    public Link insertLink(@RequestBody @Valid NewLink newLink) {
         return linkService.insertLink(newLink);
     }
 }
