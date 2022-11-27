@@ -7,6 +7,8 @@ import shortify.backend.model.LinkRequestDTO;
 import shortify.backend.model.LinkResponseDTO;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class LinkService {
@@ -27,10 +29,6 @@ public class LinkService {
     }
 
     public LinkResponseDTO linkShortener(LinkRequestDTO linkRequestDTO) {
-        // if long link exists (in database)
-        // return existing shortened link
-        // else
-        // generate short (id) which doesn't exist in database
 
         IdGenerator ig = new IdGenerator();
 
@@ -44,5 +42,13 @@ public class LinkService {
 
         LinkResponseDTO linkResponseDTO = new LinkResponseDTO(link.link(), siteUrl + "/" + id);
         return linkResponseDTO;
+    }
+
+    public String getLongLinkById(String id) {
+        Optional<Link> link = linkRepository.findById(id);
+        if (link.isPresent()) {
+            return link.get().link();
+        }
+        throw new NoSuchElementException("Request not found");
     }
 }
