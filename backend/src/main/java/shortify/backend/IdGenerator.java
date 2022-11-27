@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class IdGenerator {
 
-    public String generateId() {
-        return RandomStringUtils.randomAlphanumeric(4);
+    public String generateId(int maxLength) {
+        return RandomStringUtils.randomAlphanumeric(maxLength);
     }
 }
