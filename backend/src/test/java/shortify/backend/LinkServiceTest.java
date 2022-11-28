@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 public class LinkServiceTest {
 
     private final LinkRepository linkRepository = mock(LinkRepository.class);
+    private final LinkService linkService = new LinkService(linkRepository);
 
     @Test
     void getLinksAndExpectEmptyListOfLinks() {
@@ -35,22 +36,23 @@ public class LinkServiceTest {
     }
 
     @Test
-    void getLongLinkById() {
+    void findLongLinkByIdAndExpectLongLinkWithId() {
 
         //Given
 
         String id = "abC3";
-        Link longLink = new Link("https://testlink.test", "abC3");
-        Optional<Link> optionalLink = Optional.of(longLink);
+        String longLink = "https://testlink.test";
+        Link link = new Link(longLink, id);
+        Optional<Link> optionalLink = Optional.of(link);
 
         //When
 
         when(linkRepository.findById(id)).thenReturn(optionalLink);
-        Optional<Link> actual = Optional.of(longLink);
+        String actual = linkService.getLongLinkById(id);
 
         //Then
 
-        assertEquals(optionalLink, actual);
+        assertEquals(longLink, actual);
     }
 
 //    @Test
