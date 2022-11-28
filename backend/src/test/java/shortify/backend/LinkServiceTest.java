@@ -2,12 +2,13 @@ package shortify.backend;
 
 import org.junit.jupiter.api.Test;
 import shortify.backend.model.Link;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -19,18 +20,18 @@ public class LinkServiceTest {
     @Test
     void getLinksAndExpectEmptyListOfLinks() {
 
-        //Given
+        // Given
 
         List<Link> links = new ArrayList<>();
         Link link = new Link("https://testlink.test", "abC3");
         links.add(link);
 
-        //When
+        // When
 
         when(linkRepository.findAll()).thenReturn(links);
         List<Link> actual = linkRepository.findAll();
 
-        //Then
+        // Then
 
         assertEquals(links, actual);
     }
@@ -38,14 +39,14 @@ public class LinkServiceTest {
     @Test
     void findLongLinkByIdAndExpectLongLinkWithId() {
 
-        //Given
+        // Given
 
         String id = "abC3";
         String longLink = "https://testlink.test";
         Link link = new Link(longLink, id);
         Optional<Link> optionalLink = Optional.of(link);
 
-        //When
+        // When
 
         when(linkRepository.findById(id)).thenReturn(optionalLink);
         String actual = linkService.getLongLinkById(id);
@@ -55,6 +56,23 @@ public class LinkServiceTest {
         assertEquals(longLink, actual);
     }
 
-//    @Test
-//    void
+    @Test
+    void searchForLongLinkByIdAndExpectNoLongLinkWithSuchIdFound() {
+
+        // Given
+
+        String id = "abC3";
+        Optional<Link> optionalLink = Optional.empty();
+
+        // When
+
+        when(linkRepository.findById(id)).thenReturn(optionalLink);
+
+        // Then
+
+        assertThrows(
+                NoSuchElementException.class,
+                () -> linkService.getLongLinkById(id)
+        );
+    }
 }
