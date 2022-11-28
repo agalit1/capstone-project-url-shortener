@@ -3,7 +3,6 @@ package shortify.backend;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.NoSuchElementException;
 
 @RestController

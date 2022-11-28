@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.*;
 import shortify.backend.model.Link;
 import shortify.backend.model.LinkRequestDTO;
 import shortify.backend.model.LinkResponseDTO;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class LinkController {
     }
 
     @PostMapping
-    public LinkResponseDTO linkShortener(@RequestBody @Valid LinkRequestDTO linkRequestDTO) {
-        return linkService.linkShortener(linkRequestDTO);
+    public LinkResponseDTO shortenLink(@RequestBody @Valid LinkRequestDTO linkRequestDTO) {
+        return linkService.shortenLink(linkRequestDTO);
     }
 }

@@ -14,7 +14,7 @@ function App() {
                     <Toolbar>
                         <Link/>
                         <Typography variant="h6" component="div">
-                            It's Shortify time
+                            Shortify
                         </Typography>
                     </Toolbar>
                 </AppBar>

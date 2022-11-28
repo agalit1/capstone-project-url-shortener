@@ -4,12 +4,12 @@ import axios from "axios";
 import './Styling/LinkCard.css';
 import isURL from "validator/lib/isURL";
 
-
 function LinkCard() {
 
     const [getLinks, setGetLinks] = useState<LinkModel[]>([]);
     const [postLongLink, setPostLongLink] = useState<string>('');
     const [message, setMessage] = useState('');
+    const [show, setShow] = useState(true);
 
     useEffect(() => {
         fetchAllLinks()
@@ -28,18 +28,23 @@ function LinkCard() {
     )
 
     const postLink = () => {
+        let shortUrl;
         axios.post("/api/links", {
             link: postLongLink,
+        }).then((response) => {
+            shortUrl = response.data.shortLink;
+            setMessage("Short Url:" + shortUrl);
         })
             .catch((error) => {
                 console.log("Endpoint not available " + error)
             })
+
     }
 
     const submitForm = (e: any) => {
         e.preventDefault();
         if (isURL(postLongLink)) {
-            setMessage('')
+            setMessage('');
             postLink();
         } else {
             setMessage('Invalid link')
@@ -54,8 +59,7 @@ function LinkCard() {
                    value={postLongLink}/>
             <button>Shorten</button>
             {message}
-            <h4>MyUrls:</h4>
-            <ul>{linkList}</ul>
+            {/*<Button variant="contained"><h6>MyUrls:</h6></Button>*/}
         </form>
     </>
 }
