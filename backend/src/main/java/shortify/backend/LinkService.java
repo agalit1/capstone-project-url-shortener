@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import shortify.backend.model.Link;
 import shortify.backend.model.LinkRequestDTO;
 import shortify.backend.model.LinkResponseDTO;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -28,11 +27,13 @@ public class LinkService {
         return linkRepository.findAll();
     }
 
-    public LinkResponseDTO linkShortener(LinkRequestDTO linkRequestDTO) {
+    public LinkResponseDTO shortenLink(LinkRequestDTO linkRequestDTO) {
 
-        IdGenerator ig = new IdGenerator();
-
+        // TODO: if longLink exists, id =  existing shortLink
         String id;
+
+        // else generate new ID
+        IdGenerator ig = new IdGenerator();
         do {
             id = ig.generateId(this.linkLength);
         } while (linkRepository.existsById(id));
