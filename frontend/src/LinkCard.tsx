@@ -3,13 +3,13 @@ import {LinkModel} from "./LinkModel";
 import axios from "axios";
 import './Styling/LinkCard.css';
 import isURL from "validator/lib/isURL";
+import {Box, Button, Container, Grid, TextField} from "@mui/material";
 
 function LinkCard() {
 
     const [getLinks, setGetLinks] = useState<LinkModel[]>([]);
     const [postLongLink, setPostLongLink] = useState<string>('');
     const [message, setMessage] = useState('');
-    const [show, setShow] = useState(true);
 
     useEffect(() => {
         fetchAllLinks()
@@ -53,14 +53,36 @@ function LinkCard() {
     }
 
     return <>
-        <form onSubmit={submitForm}>
-            <label htmlFor="Paste your long url">Enter your long url</label>
-            <input type="text" id="input-link" onChange={(e) => setPostLongLink(e.target.value)}
-                   value={postLongLink}/>
-            <button>Shorten</button>
+        <Box
+            component="form"
+            display="flex"
+            onSubmit={submitForm}>
+            <Container maxWidth="md">
+                <TextField
+                    sx={{width: 500}}
+                    margin="normal"
+                    fullWidth
+                    id="input-link"
+                    label="Enter your url"
+                    autoFocus
+                    onChange={(e) => setPostLongLink(e.target.value)}
+                    value={postLongLink}
+                />
+                <Grid>
+                    <Grid item>
+                        <Button
+                            type="submit"
+                            size="large"
+                            variant="contained"
+                            sx={{mt: 3, mb: 3}}
+                        >
+                            Shorten
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Container>
             {message}
-            {/*<Button variant="contained"><h6>MyUrls:</h6></Button>*/}
-        </form>
+        </Box>
     </>
 }
 export default LinkCard;

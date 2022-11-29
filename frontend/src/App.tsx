@@ -1,7 +1,7 @@
 import './Styling/App.css';
 import LinkCard from "./LinkCard";
 import {Route, BrowserRouter, Routes} from "react-router-dom";
-import {CssBaseline, Container, Typography, AppBar, Toolbar, Box} from "@mui/material";
+import {CssBaseline, Container, Typography, AppBar, Toolbar, Box, Grid} from "@mui/material";
 import {Link} from "@mui/icons-material";
 
 function App() {
@@ -19,15 +19,26 @@ function App() {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Container>
+            <main>
                 <div>
-                    <BrowserRouter>
-                        <Routes>
-                            <Route path='/' element={<LinkCard/>}/>
-                        </Routes>
-                    </BrowserRouter>
+                    <Container maxWidth="sm">
+                        <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
+                            URL Shortener
+                        </Typography>
+                        <div>
+                            <Grid container spacing={2}>
+                                <Grid item>
+                                    <BrowserRouter>
+                                        <Routes>
+                                            <Route path='/' element={<LinkCard/>}/>
+                                        </Routes>
+                                    </BrowserRouter>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    </Container>
                 </div>
-            </Container>
+            </main>
         </>
     )
 }
