@@ -1,4 +1,4 @@
-package shortify.backend;
+package shortify.backend.link;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
