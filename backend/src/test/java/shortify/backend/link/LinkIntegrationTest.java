@@ -32,6 +32,8 @@ public class LinkIntegrationTest {
                 .andExpect((content().json("[]")));
     }
 
+
+    @DirtiesContext
     @Test
     void postLongLinkByIdAndExpectRedirectionUsingShortLink() throws Exception {
 
