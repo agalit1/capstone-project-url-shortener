@@ -5,5 +5,7 @@ import org.springframework.stereotype.Repository;
 import shortify.backend.model.Link;
 
 @Repository
-public interface LinkRepository extends MongoRepository<Link, String>{
+public interface LinkRepository extends MongoRepository<Link, String> {
+
+    Link findLinkByLinkIs(String link);
 }

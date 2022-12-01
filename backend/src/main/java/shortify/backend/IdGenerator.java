@@ -1,14 +1,12 @@
 package shortify.backend;
 
-import lombok.Data;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Data
-@Service
+@Component
 public class IdGenerator {
 
-    public String generateId(int maxLength) {
-        return RandomStringUtils.randomAlphanumeric(maxLength);
+    public String generateId(int length) {
+        return RandomStringUtils.randomAlphanumeric(length);
     }
 }
