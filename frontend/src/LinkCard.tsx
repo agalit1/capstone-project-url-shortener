@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {LinkModel} from "./LinkModel";
 import axios from "axios";
-import './Styling/LinkCard.css';
 import isURL from "validator/lib/isURL";
-import {Box, Button, Container, Grid, TextField} from "@mui/material";
+import {Button, Stack, TextField} from "@mui/material";
 
 function LinkCard() {
 
@@ -53,36 +52,35 @@ function LinkCard() {
     }
 
     return <>
-        <Box
-            component="form"
+        <Stack
+            direction="row"
+            spacing={2}
             display="flex"
+            justifyContent="space-between"
+            component="form"
             onSubmit={submitForm}>
-            <Container maxWidth="md">
-                <TextField
-                    sx={{width: 500}}
-                    margin="normal"
-                    fullWidth
-                    id="input-link"
-                    label="Enter your url"
-                    autoFocus
-                    onChange={(e) => setPostLongLink(e.target.value)}
-                    value={postLongLink}
-                />
-                <Grid>
-                    <Grid item>
-                        <Button
-                            type="submit"
-                            size="large"
-                            variant="contained"
-                            sx={{mt: 3, mb: 3}}
-                        >
-                            Shorten
-                        </Button>
-                    </Grid>
-                </Grid>
-            </Container>
-            {message}
-        </Box>
+            <TextField
+                sx={{width: 500}}
+                margin="normal"
+                fullWidth
+                id="input-link"
+                label="Enter your url"
+                autoFocus
+                onChange={(e) => setPostLongLink(e.target.value)}
+                value={postLongLink}
+            />
+            <Stack>
+                <Button
+                    type="submit"
+                    size="medium"
+                    variant="contained"
+                    sx={{mt: 2, mb: 3}}
+                >
+                    Shorten
+                </Button>
+                {message}
+            </Stack>
+        </Stack>
     </>
 }
 export default LinkCard;
