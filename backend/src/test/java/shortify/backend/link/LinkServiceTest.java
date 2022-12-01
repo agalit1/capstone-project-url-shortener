@@ -3,6 +3,7 @@ package shortify.backend.link;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.test.annotation.DirtiesContext;
 import shortify.backend.IdGenerator;
 import shortify.backend.LinkRepository;
 import shortify.backend.LinkService;
@@ -22,6 +23,7 @@ public class LinkServiceTest {
     @Autowired
     LinkRepository linkRepository;
 
+    @DirtiesContext
     @Test
     void shortenLongLinkAndExpectShortLink() {
 
@@ -47,6 +49,7 @@ public class LinkServiceTest {
 
     }
 
+    @DirtiesContext
     @Test
     void checkIfLongLinkExistsByIdAndExpectExistingShortLink() {
 
