@@ -22,6 +22,7 @@ function LinkCard() {
             .catch((error) => console.log("Endpoint not available " + error))
     }
 
+    // eslint-disable-next-line
     const linkList = getLinks.map((current) =>
         <li>{current.link}</li>
     )
