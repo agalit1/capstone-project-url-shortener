@@ -1,5 +1,6 @@
 package shortify.backend;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+
 @Service
 public class LinkService {
 
+    Logger logger = LoggerFactory.getLogger(LinkService.class.getName());
     private final String siteUrl;
 
     private final int linkLength;
@@ -45,7 +49,7 @@ public class LinkService {
         try {
             savedLink = linkRepository.findLinkByLinkIs(linkRequestDTO.link());
         } catch (IncorrectResultSizeDataAccessException exception) {
-//            TODO: spring logger System.out.println("Found more than one link");
+            logger.warn("Found more than one link");
         }
 
         if (savedLink == null) {
