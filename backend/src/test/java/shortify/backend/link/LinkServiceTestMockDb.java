@@ -1,7 +1,11 @@
-package shortify.backend;
+package shortify.backend.link;
 
 import org.junit.jupiter.api.Test;
+import shortify.backend.IdGenerator;
+import shortify.backend.LinkRepository;
+import shortify.backend.LinkService;
 import shortify.backend.model.Link;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -12,10 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class LinkServiceTest {
+
+public class LinkServiceTestMockDb {
+
+    private final String SITE_URL = "localhost:8080";
+    private final int LINK_LENGTH = 4;
 
     private final LinkRepository linkRepository = mock(LinkRepository.class);
-    private final LinkService linkService = new LinkService(linkRepository);
+    private final IdGenerator idGenerator = mock(IdGenerator.class);
+    private final LinkService linkService = new LinkService(linkRepository, idGenerator, SITE_URL, LINK_LENGTH);
 
     @Test
     void getLinksAndExpectEmptyListOfLinks() {
@@ -29,7 +38,7 @@ public class LinkServiceTest {
         // When
 
         when(linkRepository.findAll()).thenReturn(links);
-        List<Link> actual = linkRepository.findAll();
+        List<Link> actual = linkService.getLinks();
 
         // Then
 
