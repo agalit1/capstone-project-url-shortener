@@ -1,10 +1,12 @@
 package shortify.backend;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
 import shortify.backend.model.Link;
 import shortify.backend.model.LinkRequestDTO;
 import shortify.backend.model.LinkResponseDTO;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -12,15 +14,24 @@ import java.util.Optional;
 @Service
 public class LinkService {
 
-    @Value("${shortify.siteUrl}")
-    private String siteUrl;
+    private final String siteUrl;
 
-    @Value("${shortify.shortening.length}")
-    private int linkLength;
+    private final int linkLength;
+
     public final LinkRepository linkRepository;
 
-    public LinkService(LinkRepository linkRepository) {
+    private final IdGenerator ig;
+
+    public LinkService(
+            LinkRepository linkRepository,
+            IdGenerator ig,
+            @Value("${shortify.siteUrl}") String siteUrl,
+            @Value("${shortify.shortening.length}") int linkLength
+    ) {
         this.linkRepository = linkRepository;
+        this.ig = ig;
+        this.siteUrl = siteUrl;
+        this.linkLength = linkLength;
     }
 
     public List<Link> getLinks() {
@@ -29,20 +40,23 @@ public class LinkService {
 
     public LinkResponseDTO shortenLink(LinkRequestDTO linkRequestDTO) {
 
-        // TODO: if longLink exists, id =  existing shortLink
-        String id;
+        Link savedLink = null;
 
-        // else generate new ID
-        IdGenerator ig = new IdGenerator();
-        do {
-            id = ig.generateId(this.linkLength);
-        } while (linkRepository.existsById(id));
+        try {
+            savedLink = linkRepository.findLinkByLinkIs(linkRequestDTO.link());
+        } catch (IncorrectResultSizeDataAccessException exception) {
+            System.out.println("Found more than one link");
+        }
 
-        Link link = new Link(linkRequestDTO.link(), id);
-        linkRepository.save(link);
+        if (savedLink == null) {
+            String id;
+            do {
+                id = ig.generateId(this.linkLength);
+            } while (linkRepository.existsById(id));
+            savedLink = linkRepository.save(new Link(linkRequestDTO.link(), id));
+        }
 
-        LinkResponseDTO linkResponseDTO = new LinkResponseDTO(link.link(), siteUrl + "/" + id);
-        return linkResponseDTO;
+        return new LinkResponseDTO(savedLink.link(), siteUrl + "/" + savedLink.id());
     }
 
     public String getLongLinkById(String id) {
