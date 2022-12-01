@@ -17,7 +17,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-public class LinkServiceTestMockDb {
+class LinkServiceMockDBTest {
 
     private final String SITE_URL = "localhost:8080";
     private final int LINK_LENGTH = 4;

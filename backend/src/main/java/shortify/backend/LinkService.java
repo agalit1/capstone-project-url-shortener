@@ -45,7 +45,7 @@ public class LinkService {
         try {
             savedLink = linkRepository.findLinkByLinkIs(linkRequestDTO.link());
         } catch (IncorrectResultSizeDataAccessException exception) {
-            System.out.println("Found more than one link");
+//            TODO: spring logger System.out.println("Found more than one link");
         }
 
         if (savedLink == null) {
