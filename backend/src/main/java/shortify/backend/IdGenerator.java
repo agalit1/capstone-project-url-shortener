@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class IdGenerator {
 
     public String generateId(int length) {
-        return RandomStringUtils.randomAlphanumeric(length);
+        return RandomStringUtils.randomAlphanumeric(length); //NOSONAR not used in secure contexts
     }
 }
