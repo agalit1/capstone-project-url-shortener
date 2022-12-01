@@ -1,4 +1,5 @@
-import './Styling/App.css';
+import './style/App.css';
+import './style/style';
 import LinkCard from "./LinkCard";
 import {Route, BrowserRouter, Routes} from "react-router-dom";
 import {CssBaseline, Container, Typography, AppBar, Toolbar, Box, Grid} from "@mui/material";
@@ -6,10 +7,11 @@ import {Link} from "@mui/icons-material";
 
 function App() {
 
+
     return (
         <>
             <CssBaseline/>
-            <Box sx={{flexGrow: 1}}>
+            <Box sx={{flexGrow: 1, mb: 3}}>
                 <AppBar position="relative">
                     <Toolbar>
                         <Link/>
@@ -20,12 +22,12 @@ function App() {
                 </AppBar>
             </Box>
             <main>
-                <div>
+                <Box>
                     <Container maxWidth="sm">
                         <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
                             URL Shortener
                         </Typography>
-                        <div>
+                        <Box>
                             <Grid container spacing={2}>
                                 <Grid item>
                                     <BrowserRouter>
@@ -35,9 +37,9 @@ function App() {
                                     </BrowserRouter>
                                 </Grid>
                             </Grid>
-                        </div>
+                        </Box>
                     </Container>
-                </div>
+                </Box>
             </main>
         </>
     )
