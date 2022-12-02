@@ -2,9 +2,10 @@ import './style/App.css';
 import './style/style';
 import LinkCard from "./LinkCard";
 import {Route, BrowserRouter, Routes} from "react-router-dom";
-import {CssBaseline, Container, Typography, AppBar, Toolbar, Box, Grid} from "@mui/material";
+import {CssBaseline, Typography, AppBar, Toolbar, Box} from "@mui/material";
 import {Link} from "@mui/icons-material";
 import BackgroundAnimate from "./BackgroundAnimate";
+import LinkResult from "./LinkResult";
 
 function App() {
 
@@ -22,28 +23,19 @@ function App() {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <main>
-                <Box>
-                    <Container maxWidth="sm">
-                        <Typography display="inline" variant="h2" align="center" color="textPrimary" gutterBottom
-                                    fontFamily='Lato'>
-                            URL <span className="title">Shortener</span>
-                        </Typography>
-                        <BackgroundAnimate/>
-                        <Box>
-                            <Grid container spacing={2}>
-                                <Grid item>
-                                    <BrowserRouter>
-                                        <Routes>
-                                            <Route path='/' element={<LinkCard/>}/>
-                                        </Routes>
-                                    </BrowserRouter>
-                                </Grid>
-                            </Grid>
-                        </Box>
-                    </Container>
-                </Box>
-            </main>
+            <div className="container">
+                <Typography display="inline" variant="h2" align="center" color="textPrimary" gutterBottom
+                            fontFamily='Lato'>
+                    URL <span className="title">Shortener</span>
+                </Typography>
+                <BackgroundAnimate/>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path='/' element={<LinkCard/>}/>
+                    </Routes>
+                </BrowserRouter>
+                <LinkResult/>
+            </div>
         </>
     )
 }
