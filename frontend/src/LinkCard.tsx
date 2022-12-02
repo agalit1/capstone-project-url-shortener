@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {LinkModel} from "./LinkModel";
 import axios from "axios";
 import isURL from "validator/lib/isURL";
-import {Button, Stack, TextField} from "@mui/material";
 
 function LinkCard() {
 
@@ -27,7 +26,7 @@ function LinkCard() {
         <li>{current.link}</li>
     )
 
-    const postLink = () => {
+    const postForm = () => {
         let shortUrl;
         axios.post("/api/links", {
             link: postLongLink,
@@ -38,50 +37,34 @@ function LinkCard() {
             .catch((error) => {
                 console.log("Endpoint not available " + error)
             })
-
     }
 
     const submitForm = (e: any) => {
         e.preventDefault();
         if (isURL(postLongLink)) {
             setMessage('');
-            postLink();
+            postForm();
+            return
         } else {
             setMessage('Invalid link')
         }
         setPostLongLink('');
     }
 
-    return <>
-        <Stack
-            direction="row"
-            spacing={2}
-            display="flex"
-            justifyContent="space-between"
-            component="form"
-            onSubmit={submitForm}>
-            <TextField
-                sx={{width: 500}}
-                margin="normal"
-                fullWidth
-                id="input-link"
-                label="Enter your url"
-                autoFocus
-                onChange={(e) => setPostLongLink(e.target.value)}
-                value={postLongLink}
-            />
-            <Stack>
-                <Button
-                    type="submit"
-                    size="medium"
-                    variant="contained"
-                    sx={{mt: 2, mb: 3}}
-                >
+    // {message}
+    return (
+        <div className="inputContainer" onSubmit={submitForm}>
+            <div>
+                <input type="text"
+                       placeholder="Enter your url"
+                       onChange={(e) => setPostLongLink(e.target.value)}
+                       value={postLongLink}/>
+                <button
+                    onClick={submitForm}>
                     Shorten
-                </Button>
-                {message}
-            </Stack>
-        </Stack>
-    </>
+                </button>
+            </div>
+        </div>
+    )
 }
 export default LinkCard;
