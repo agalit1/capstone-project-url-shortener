@@ -40,6 +40,39 @@
     cursor: pointer;
 }
 
+/* Result */
+.result {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+}
+
+.result p {
+    color: black;
+    border: 1px solid var(--primary-color);
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+}
+
+.result button {
+    padding: 0.5rem 1rem;
+    color: #fff;
+    cursor: pointer;
+    background: var(--primary-color);
+    border: none;
+}
+
+.result button.copied {
+    background: #fff;
+    color: var(--primary-color);
+}
+
+.noData {
+    color: #fff;
+    font-size: 1rem;
+}
+
 .title {
     color: #BB86FC;
 }
