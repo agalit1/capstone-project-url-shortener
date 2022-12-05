@@ -6,9 +6,12 @@ import {CssBaseline, Typography, AppBar, Toolbar, Box} from "@mui/material";
 import {Link} from "@mui/icons-material";
 import BackgroundAnimate from "./BackgroundAnimate";
 import LinkResult from "./LinkResult";
+import {useState} from "react";
+
 
 function App() {
 
+    const [shortLink, setShortLink] = useState("");
 
     return (
         <>
@@ -31,10 +34,10 @@ function App() {
                 <BackgroundAnimate/>
                 <BrowserRouter>
                     <Routes>
-                        <Route path='/' element={<LinkCard/>}/>
+                        <Route path='/' element={<LinkCard setShortLink={setShortLink}/>}/>
                     </Routes>
                 </BrowserRouter>
-                <LinkResult/>
+                <LinkResult shortLink={shortLink}/>
             </div>
         </>
     )
