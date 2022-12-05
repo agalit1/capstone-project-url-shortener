@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import axios from "axios";
 import isURL from "validator/lib/isURL";
 
@@ -23,7 +23,7 @@ function LinkCard(props: Props) {
             })
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (isURL(postLongLink)) {
             postForm();
@@ -35,18 +35,17 @@ function LinkCard(props: Props) {
     }
 
     return (
-        <div className="inputContainer" onSubmit={handleSubmit}>
+        <form className="inputContainer" onSubmit={handleSubmit}>
             <div>
                 <input type="text"
                        placeholder="Enter your url"
                        onChange={(e) => setPostLongLink(e.target.value)}
                        value={postLongLink}/>
-                <button
-                    onClick={handleSubmit}>
+                <button>
                     Shorten
                 </button>
             </div>
-        </div>
+        </form>
     )
 }
 
