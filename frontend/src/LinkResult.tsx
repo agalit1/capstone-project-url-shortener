@@ -8,7 +8,6 @@ type Props = {
 const LinkResult = (props: Props) => {
 
     const [copied, setCopied] = useState(false);
-    const [error, setError] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -17,11 +16,6 @@ const LinkResult = (props: Props) => {
 
         return () => clearTimeout(timer);
     }, [copied]);
-
-    if (error) {
-        setError(error);
-        return <p className="noData">Sorry, something went wrong. Try again later.</p>
-    }
 
     return (
         <> {props.shortLink && (
