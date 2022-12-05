@@ -1,8 +1,7 @@
 import React from 'react';
 
 const backgroundAnimate = () => {
-    return (
-        <ul className="background">
+    return (<ul className="background">
         </ul>
     )
 }
