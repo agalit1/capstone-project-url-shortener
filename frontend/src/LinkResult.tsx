@@ -19,6 +19,7 @@ const LinkResult = (props: Props) => {
     }, [copied]);
 
     if (error) {
+        setError(error);
         return <p className="noData">Sorry, something went wrong. Try again later.</p>
     }
 
