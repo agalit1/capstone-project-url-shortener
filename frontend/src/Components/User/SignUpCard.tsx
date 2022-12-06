@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography,} from "@mui/material";
+import {Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField,} from "@mui/material";
 import LockPersonOutlinedIcon from '@mui/icons-material/LockPersonOutlined';
 import axios from "axios";
 import {InferType, object, string} from 'yup';
@@ -54,10 +54,7 @@ function SignUpCard() {
                 <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                     <LockPersonOutlinedIcon/>
                 </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign up
-                </Typography>
-                <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{mt: 3}}>
+                <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{mt: 3}} autoComplete="off">
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
