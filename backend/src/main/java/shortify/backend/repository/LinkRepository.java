@@ -1,4 +1,4 @@
-package shortify.backend;
+package shortify.backend.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

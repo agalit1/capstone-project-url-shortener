@@ -7,7 +7,7 @@ import BackgroundAnimate from "./Components/Link/BackgroundAnimate";
 import LinkResult from "./Components/Link/LinkResult";
 import {useState} from "react";
 import SignUpCard from "./Components/User/SignUpCard";
-import ApplicationBar from "./ApplicationBar";
+import ApplicationBar from "./Components/Navigation/ApplicationBar";
 
 
 function App() {

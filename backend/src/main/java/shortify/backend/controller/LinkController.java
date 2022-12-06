@@ -1,9 +1,11 @@
-package shortify.backend;
+package shortify.backend.controller;
 
 import org.springframework.web.bind.annotation.*;
 import shortify.backend.model.Link;
 import shortify.backend.model.LinkRequestDTO;
 import shortify.backend.model.LinkResponseDTO;
+import shortify.backend.service.LinkService;
+
 import javax.validation.Valid;
 import java.util.List;
 

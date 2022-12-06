@@ -1,4 +1,4 @@
-package shortify.backend;
+package shortify.backend.utility;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
