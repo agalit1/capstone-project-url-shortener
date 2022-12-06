@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.annotation.DirtiesContext;
-import shortify.backend.IdGenerator;
-import shortify.backend.LinkRepository;
-import shortify.backend.LinkService;
 import shortify.backend.model.LinkRequestDTO;
 import shortify.backend.model.LinkResponseDTO;
+import shortify.backend.repository.LinkRepository;
+import shortify.backend.service.LinkService;
+import shortify.backend.utility.IdGenerator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;

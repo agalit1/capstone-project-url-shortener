@@ -1,5 +1,6 @@
-package shortify.backend;
+package shortify.backend.service;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -7,12 +8,12 @@ import org.springframework.stereotype.Service;
 import shortify.backend.model.Link;
 import shortify.backend.model.LinkRequestDTO;
 import shortify.backend.model.LinkResponseDTO;
+import shortify.backend.repository.LinkRepository;
+import shortify.backend.utility.IdGenerator;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
-import org.slf4j.Logger;
 
 @Service
 public class LinkService {

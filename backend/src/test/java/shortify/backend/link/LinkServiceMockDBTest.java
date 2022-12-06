@@ -1,10 +1,10 @@
 package shortify.backend.link;
 
 import org.junit.jupiter.api.Test;
-import shortify.backend.IdGenerator;
-import shortify.backend.LinkRepository;
-import shortify.backend.LinkService;
 import shortify.backend.model.Link;
+import shortify.backend.repository.LinkRepository;
+import shortify.backend.service.LinkService;
+import shortify.backend.utility.IdGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
