@@ -5,13 +5,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import shortify.backend.service.UserService;
+import shortify.backend.model.AppUser;
+import shortify.backend.service.AppUserService;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class SecurityConfig {
 
     public static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public final UserService userService;
+    public final AppUserService appUserService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -30,16 +32,32 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,
                         "/api/users/signup"
                 ).permitAll()
-                .antMatchers("/api/users/login",
-                        "/api/users-logout"
-                ).authenticated()
                 .anyRequest().denyAll()
                 .and().build();
     }
 
+    @Bean
+    public PasswordEncoder encoder() {
+        return passwordEncoder;
+    }
+
+    @Bean
     public UserDetailsManager userDetailsManager() {
 
         return new UserDetailsManager() {
+
+            @Override
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                AppUser appUserByUsername = appUserService.findUserByUsername(username);
+                if (appUserByUsername == null) {
+                    throw new UsernameNotFoundException("Username not found");
+                }
+                return User.builder()
+                        .username(username)
+                        .password(appUserByUsername.password())
+                        .roles("BASIC")
+                        .build();
+            }
 
             @Override
             public void createUser(UserDetails user) {
@@ -65,17 +83,6 @@ public class SecurityConfig {
             public boolean userExists(String username) {
                 return false;
             }
-
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return null;
-            }
         };
-
-    }
-
-    @Bean
-    public PasswordEncoder encoder() {
-        return passwordEncoder;
     }
 }

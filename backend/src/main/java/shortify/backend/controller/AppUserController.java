@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import shortify.backend.model.UserSignUpDTO;
-import shortify.backend.service.UserService;
+import shortify.backend.service.AppUserService;
 
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
-public class UserController {
+public class AppUserController {
 
-    private final UserService userService;
+    private final AppUserService appUserService;
 
-    @PostMapping
+    @PostMapping("/signup")
     public void createUser(@RequestBody @Valid UserSignUpDTO userSignUpDTO) {
-        userService.save(userSignUpDTO);
+        appUserService.save(userSignUpDTO);
     }
 
 }
