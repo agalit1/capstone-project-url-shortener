@@ -3,7 +3,9 @@ package shortify.backend.service;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import shortify.backend.model.AppUser;
 import shortify.backend.model.UserSignUpDTO;
 import shortify.backend.repository.AppUserRepository;
@@ -19,34 +21,56 @@ public class AppUserService {
 
     Logger logger = LoggerFactory.getLogger(AppUserService.class.getName());
 
-
-    public AppUser findUserByUsername(String username) {
-        return appUserRepository.findUserByUsername(username);
+    public AppUser findAppUserByUsername(String username) {
+        return appUserRepository.findAppUserByUsername(username);
     }
 
-    public void save(UserSignUpDTO userSignUpDTO) {
-
-        AppUser savedUser = null;
-
-        try {
-            savedUser = findUserByUsername(userSignUpDTO.username());
-        } catch (Exception exception) {
-            logger.warn("Found more than one user");
-        }
-
-        if (savedUser == null) {
-            String securePassword = SecurityConfig
-                    .passwordEncoder
-                    .encode(userSignUpDTO.password());
-
-            AppUser appUser = new AppUser(
-                    uuidGenerator.generateUUID(),
-                    userSignUpDTO.username(),
-                    userSignUpDTO.email(),
-                    securePassword
-            );
-            appUserRepository.save(appUser);
-            System.out.println(appUser);
-        }
+    public AppUser findAppUserByEmail(String email) {
+        return appUserRepository.findAppUserByEmail(email);
     }
+
+    public AppUser saveUser(UserSignUpDTO userSignUpDTO) {
+
+        if (appUserRepository.existsByEmail(userSignUpDTO.email())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is already in use");
+        }
+
+        String securePassword = SecurityConfig
+                .passwordEncoder
+                .encode(userSignUpDTO.password());
+
+        AppUser appUser = new AppUser(
+                uuidGenerator.generateUUID(),
+                userSignUpDTO.username(),
+                userSignUpDTO.email(),
+                securePassword
+        );
+
+        return appUserRepository.save(appUser);
+
+    }
+
+//        AppUser savedUser;
+//
+//        try {
+//            savedUser = appUserRepository.findAppUserByEmail(userSignUpDTO.email());
+//        } catch (Exception e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//        }
+//
+//        if (savedUser == null) {
+//            String securePassword = SecurityConfig
+//                    .passwordEncoder
+//                    .encode(userSignUpDTO.password());
+//
+//            AppUser appUser = new AppUser(
+//                    uuidGenerator.generateUUID(),
+//                    userSignUpDTO.username(),
+//                    userSignUpDTO.email(),
+//                    securePassword
+//            );
+//            savedUser = appUserRepository.save(appUser);
+//        }
+//        return savedUser;
+//    }
 }

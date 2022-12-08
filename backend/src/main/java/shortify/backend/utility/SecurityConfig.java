@@ -30,8 +30,11 @@ public class SecurityConfig {
                 .httpBasic().and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST,
-                        "/api/users/signup"
+                        "/api/users/signup", "/api/links"
                 ).permitAll()
+                .antMatchers(HttpMethod.GET,
+                        "/api/users/login")
+                .authenticated()
                 .anyRequest().denyAll()
                 .and().build();
     }
@@ -47,15 +50,14 @@ public class SecurityConfig {
         return new UserDetailsManager() {
 
             @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                AppUser appUserByUsername = appUserService.findUserByUsername(username);
-                if (appUserByUsername == null) {
-                    throw new UsernameNotFoundException("Username not found");
+            public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+                AppUser appUser = appUserService.findAppUserByEmail(usernameOrEmail);
+                if (appUser == null) {
+                    throw new UsernameNotFoundException("Invalid email or password");
                 }
                 return User.builder()
-                        .username(username)
-                        .password(appUserByUsername.password())
-                        .roles("BASIC")
+                        .username(appUser.username())
+                        .password(appUser.password())
                         .build();
             }
 
