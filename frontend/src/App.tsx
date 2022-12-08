@@ -4,15 +4,11 @@ import LinkCard from "./Components/Link/LinkCard";
 import {Route, Routes} from "react-router-dom";
 import {Typography} from "@mui/material";
 import BackgroundAnimate from "./Components/Link/BackgroundAnimate";
-import LinkResult from "./Components/Link/LinkResult";
-import {useState} from "react";
 import SignUpCard from "./Components/User/SignUpCard";
 import ApplicationBar from "./Components/Navigation/ApplicationBar";
 
 
 function App() {
-
-    const [shortLink, setShortLink] = useState("");
 
     return (
         <>
@@ -24,10 +20,9 @@ function App() {
                     <p className="slogan">Shortify - the shorter the better.</p>
                 </Typography>
                 <Routes>
-                    <Route path='/' element={<LinkCard setShortLink={setShortLink}/>}/>
+                    <Route path='/' element={<LinkCard/>}/>
                     <Route path='/signup' element={<SignUpCard/>}/>
                 </Routes>
-                <LinkResult shortLink={shortLink}/>
                 <BackgroundAnimate/>
             </div>
         </>

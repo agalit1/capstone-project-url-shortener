@@ -1,14 +1,12 @@
 import React, {ChangeEvent, useState} from 'react';
 import axios from "axios";
 import isURL from "validator/lib/isURL";
+import LinkResult from "./LinkResult";
 
-type Props = {
-    setShortLink: (shortLink: string) => void;
-}
-
-function LinkCard(props: Props) {
+function LinkCard() {
 
     const [postLongLink, setPostLongLink] = useState<string>('');
+    const [shortLink, setShortLink] = useState<string>('');
 
     const postForm = () => {
         let shortUrl;
@@ -16,7 +14,7 @@ function LinkCard(props: Props) {
             link: postLongLink,
         }).then((response) => {
             shortUrl = response.data.shortLink;
-            props.setShortLink(shortUrl);
+            setShortLink(shortUrl);
         })
             .catch((error) => {
                 console.log("Endpoint not available " + error)
@@ -45,6 +43,7 @@ function LinkCard(props: Props) {
                     Shorten
                 </button>
             </div>
+            <LinkResult shortLink={shortLink}/>
         </form>
     )
 }

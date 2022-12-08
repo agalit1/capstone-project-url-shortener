@@ -39,6 +39,8 @@ function ApplicationBar() {
                         </div>
                     </Toolbar>
                 </AppBar>
+                <Toolbar>
+                </Toolbar>
             </Box>
         </>
     );
