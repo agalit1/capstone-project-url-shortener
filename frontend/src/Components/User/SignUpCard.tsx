@@ -35,8 +35,12 @@ function SignUpCard() {
             .then((response) => {
                 setSuccess(true)
             })
-            .catch(() => {
-                setErrorMessage("")
+            .catch((err) => {
+                if (err.response?.status === 400) {
+                    setErrorMessage("Email already in use")
+                } else {
+                    setErrorMessage("Registration failed")
+                }
             })
     }
 
@@ -59,84 +63,89 @@ function SignUpCard() {
                     </p>
                 </section>
             ) : (
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{m: 1, bgcolor: '#BB86FC'}}>
-                        <LockPersonOutlinedIcon/>
-                    </Avatar>
-                    <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{mt: 3}} autoComplete="off">
-                        <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                                <TextField
-                                    {...register("username")}
-                                    required
-                                    fullWidth
-                                    id="username"
-                                label="Username"
-                                autoFocus
-                            />
-                        </Grid>
-                        <span className="error">{errors?.username?.message}</span>
-                        <Grid item xs={12}>
-                            <TextField
-                                {...register("email")}
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                            />
-                        </Grid>
-                        <span className="error">{errors?.email?.message}</span>
-                        <Grid item xs={12}>
-                            <TextField
-                                {...register("password")}
-                                required
-                                fullWidth
-                                label="Password"
-                                type="password"
-                                id="password"
-                            />
-                        </Grid>
-                        <span className="error">{errors?.password?.message}</span>
-                        <Grid item xs={12}>
-                            <TextField
-                                {...register("confirmPassword")}
-                                required
-                                fullWidth
-                                label="Confirm Password"
-                                type="password"
-                                id="confirmPassword"
-                            />
-                        </Grid>
-                            <span className="error">{errors?.confirmPassword?.message}</span>
-                        </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{mt: 3, mb: 2}}
-                        >
-                            Sign Up
-                        </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                {/*routerlink*/}
-                                <Link href="#" variant="body2" sx={{color: "#BB86FC"}}>
-                                    Already have an account? Sign in
-                                </Link>
+                <section>
+                    <p>{errorMessage}</p>
+                    <Box
+                        sx={{
+                            marginTop: 8,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Avatar sx={{m: 1, bgcolor: '#BB86FC'}}>
+                            <LockPersonOutlinedIcon/>
+                        </Avatar>
+                        <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{mt: 3}}
+                             autoComplete="off">
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        {...register("username")}
+                                        required
+                                        fullWidth
+                                        id="username"
+                                        label="Username"
+                                        autoFocus
+                                    />
+                                </Grid>
+                                <span className="error">{errors?.username?.message}</span>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        {...register("email")}
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                    />
+                                </Grid>
+                                <span className="error">{errors?.email?.message}</span>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        {...register("password")}
+                                        required
+                                        fullWidth
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                    />
+                                </Grid>
+                                <span className="error">{errors?.password?.message}</span>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        {...register("confirmPassword")}
+                                        required
+                                        fullWidth
+                                        label="Confirm Password"
+                                        type="password"
+                                        id="confirmPassword"
+                                    />
+                                </Grid>
+                                <span className="error">{errors?.confirmPassword?.message}</span>
                             </Grid>
-                        </Grid>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{mt: 3, mb: 2}}
+                            >
+                                Sign Up
+                            </Button>
+                            <Grid container justifyContent="flex-end">
+                                <Grid item>
+                                    {/*routerlink*/}
+                                    <Link href="#" variant="body2" sx={{color: "#BB86FC"}}>
+                                        Already have an account? Sign in
+                                    </Link>
+                                </Grid>
+                            </Grid>
+                        </Box>
                     </Box>
-                </Box>
+                </section>
             )}
         </Container>
     );
 }
+
 
 export default SignUpCard;

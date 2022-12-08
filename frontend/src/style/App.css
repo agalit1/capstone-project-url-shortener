@@ -1,9 +1,9 @@
 .container {
-    height: 30vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-top: 5px;
 }
 
 .inputContainer div {
@@ -12,6 +12,7 @@
 }
 
 .inputContainer input {
+    font-family: 'Lato', sans-serif;
     width: 100%;
     padding: 0.5rem 0.2rem 0.5rem 0;
     text-indent: 1rem;
@@ -43,13 +44,14 @@
 /* Result */
 .result {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
 }
 
 .result p {
     width: 100%;
+    font-family: 'Lato', sans-serif;
     text-indent: 1rem;
     border: 1px solid;
     outline: none;
@@ -135,5 +137,10 @@
 .nav li:hover {
     color: #BB86FC;
 }
+
+.copied {
+    color: #BB86FC;
+}
+
 
 
