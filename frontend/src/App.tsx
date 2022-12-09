@@ -22,6 +22,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<LinkCard/>}/>
                     <Route path='/signup' element={<SignUpCard/>}/>
+                    <Route path='/login' element={<SignUpCard/>}/>
                 </Routes>
                 <BackgroundAnimate/>
             </div>
