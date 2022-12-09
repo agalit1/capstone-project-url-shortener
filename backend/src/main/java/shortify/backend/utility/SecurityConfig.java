@@ -29,9 +29,13 @@ public class SecurityConfig {
                 .csrf().disable()
                 .httpBasic().and()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET,
+                        "/**")
+                .permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/api/users/signup", "/api/links"
-                ).permitAll()
+                )
+                .permitAll()
                 .antMatchers(HttpMethod.GET,
                         "/api/users/login")
                 .authenticated()
