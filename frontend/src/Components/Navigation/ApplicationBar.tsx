@@ -34,6 +34,13 @@ function ApplicationBar() {
                                             </Typography>
                                         </RouterLink>
                                     </li>
+                                    <li>
+                                        <RouterLink to='/login'>
+                                            <Typography variant="h6" component="div" fontFamily='Lato'>
+                                                Sign In
+                                            </Typography>
+                                        </RouterLink>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>

@@ -5,7 +5,9 @@ import {Route, Routes} from "react-router-dom";
 import {Typography} from "@mui/material";
 import BackgroundAnimate from "./Components/Link/BackgroundAnimate";
 import SignUpCard from "./Components/User/SignUpCard";
+import SignInCard from "./Components/User/SignInCard";
 import ApplicationBar from "./Components/Navigation/ApplicationBar";
+import Footer from "./Footer";
 
 
 function App() {
@@ -22,8 +24,9 @@ function App() {
                 <Routes>
                     <Route path='/' element={<LinkCard/>}/>
                     <Route path='/signup' element={<SignUpCard/>}/>
-                    <Route path='/login' element={<SignUpCard/>}/>
+                    <Route path='/login' element={<SignInCard/>}/>
                 </Routes>
+                <Footer/>
                 <BackgroundAnimate/>
             </div>
         </>
