@@ -15,24 +15,7 @@ import {
 } from "@mui/material";
 import LockPersonOutlinedIcon from '@mui/icons-material/LockPersonOutlined';
 
-function Copyright(props: any) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="#">
-                Shortify
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
-type Props = {
-    onLogin: () => void,
-}
-
-function SignInCard(props: Props) {
+function SignInCard() {
 
     const [data, setData] = useState({
         email: "",
@@ -49,7 +32,6 @@ function SignInCard(props: Props) {
             password: data.password
         };
         axios.post("/api/users/login", userData).then()
-            .then(props.onLogin)
             .then(() => {
                 setSuccess(true)
             })
@@ -124,7 +106,6 @@ function SignInCard(props: Props) {
                     </Grid>
                 </Box>
             </Box>
-            <Copyright sx={{mt: 8, mb: 4}}/>
         </Container>
     );
 }

@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField,} from "@mui/material";
+import {Avatar, Box, Button, Container, CssBaseline, Grid, TextField,} from "@mui/material";
 import LockPersonOutlinedIcon from '@mui/icons-material/LockPersonOutlined';
 import axios from "axios";
 import * as yup from 'yup';
 import {InferType, object, string} from 'yup';
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
+import {NavLink} from "react-router-dom";
 
 
 const signUpSchema = object({
@@ -133,10 +134,9 @@ function SignUpCard() {
                             </Button>
                             <Grid container justifyContent="flex-end">
                                 <Grid item>
-                                    {/*routerlink*/}
-                                    <Link href="#" variant="body2" sx={{color: "#BB86FC"}}>
+                                    <NavLink to="/login">
                                         Already have an account? Sign in
-                                    </Link>
+                                    </NavLink>
                                 </Grid>
                             </Grid>
                         </Box>
