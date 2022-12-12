@@ -57,7 +57,7 @@ function SignUpCard() {
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
             {success ? (
-                <div>
+                <div className="successMessage">
                     <h1>Registration successful</h1>
                     <p>
                         <NavLink to="/login">Sign in</NavLink>
@@ -65,7 +65,7 @@ function SignUpCard() {
                 </div>
             ) : (
                 <div>
-                    <p>{errorMessage}</p>
+                    <p className="errorMessage">{errorMessage}</p>
                     <Box
                         sx={{
                             display: 'flex',
@@ -137,7 +137,7 @@ function SignUpCard() {
                             <Grid container justifyContent="flex-end">
                                 <Grid item>
                                     <NavLink to="/login">
-                                        Already have an account? Sign in
+                                        {"Already have an account? Sign in"}
                                     </NavLink>
                                 </Grid>
                             </Grid>
