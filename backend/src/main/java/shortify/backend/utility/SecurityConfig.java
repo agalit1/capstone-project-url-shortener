@@ -20,8 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    public static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     public final AppUserService appUserService;
 
     @Bean
@@ -45,7 +43,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder encoder() {
-        return passwordEncoder;
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
