@@ -16,7 +16,6 @@ public class AppUserService {
 
     private final AppUserRepository appUserRepository;
     private final UuidGenerator uuidGenerator;
-
     private final PasswordEncoder passwordEncoder;
 
     public AppUser findAppUserByEmail(String email) {
