@@ -4,7 +4,7 @@ import {Box, Container, Link, Typography} from "@mui/material";
 function Footer() {
 
     return (
-        <footer>
+        <footer className="footer">
             <Container>
                 <Box textAlign="center" pt={{xs: 5, sm: 10}} pb={{xs: 5, sm: 0}}>
                     <Typography variant="body2" color="text.secondary">
@@ -13,7 +13,6 @@ function Footer() {
                             Shortify
                         </Link>{' '}
                         {new Date().getFullYear()}
-                        {'.'}
                     </Typography>
                 </Box>
             </Container>

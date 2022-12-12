@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Avatar, Box, Button, Container, CssBaseline, Grid, TextField,} from "@mui/material";
+import {Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography,} from "@mui/material";
 import LockPersonOutlinedIcon from '@mui/icons-material/LockPersonOutlined';
 import axios from "axios";
 import * as yup from 'yup';
@@ -57,18 +57,17 @@ function SignUpCard() {
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
             {success ? (
-                <section>
+                <div>
                     <h1>Registration successful</h1>
                     <p>
-                        <a href="#">Sign in</a>
+                        <NavLink to="/login">Sign in</NavLink>
                     </p>
-                </section>
+                </div>
             ) : (
-                <section>
+                <div>
                     <p>{errorMessage}</p>
                     <Box
                         sx={{
-                            marginTop: 8,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -77,6 +76,9 @@ function SignUpCard() {
                         <Avatar sx={{m: 1, bgcolor: '#BB86FC'}}>
                             <LockPersonOutlinedIcon/>
                         </Avatar>
+                        <Typography component="h1" variant="h5">
+                            Sign Up
+                        </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{mt: 3}}
                              autoComplete="off">
                             <Grid container spacing={2}>
@@ -141,7 +143,7 @@ function SignUpCard() {
                             </Grid>
                         </Box>
                     </Box>
-                </section>
+                </div>
             )}
         </Container>
     );

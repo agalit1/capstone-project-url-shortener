@@ -1,4 +1,4 @@
-export type SignUpGuestModel = {
+export type SignUpUserModel = {
     username: string;
     email: string;
     password: string;
