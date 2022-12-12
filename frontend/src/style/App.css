@@ -8,7 +8,6 @@
 
 .inputContainer div {
     display: flex;
-    margin-bottom: 2rem;
 }
 
 .inputContainer input {
@@ -16,7 +15,7 @@
 }
 
 .inputContainer input::placeholder {
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .inputContainer button {
@@ -43,31 +42,35 @@
 }
 
 .result p {
-    width: 100%;
     font-family: 'Lato', sans-serif;
-    text-indent: 1rem;
     border: 0.5px gray solid;
     outline: none;
     font-size: 1rem;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     color: black;
-    padding: 2px;
+    padding: 0.8rem 0.8rem 0.8rem;
+    margin-left: 0;
 }
 
 .result button {
-    height: fit-content;
-    font-family: 'Lato', sans-serif;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    padding: 1rem;
+    padding: 0.8rem 0.8rem 0.8rem;
     color: #fff;
     cursor: pointer;
     background: var(--primary-color);
     border: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8rem;
+    /*text-align: center;*/
+    /*text-transform: uppercase;*/
+    /*font-weight: bold;*/
+    /*border-top-right-radius: 3px;*/
+    /*border-bottom-right-radius: 3px;*/
+    /*color: #fff;*/
+    /*cursor: pointer;*/
+    /*background: var(--primary-color);*/
+    /*border: none;*/
+    /*padding: 0.5rem 1rem;*/
 }
 
 .result button.copied {
@@ -143,4 +146,11 @@
     width: 100%;
 }
 
+.errorMessage {
+    color: red;
+}
 
+.successMessage {
+    color: green;
+    font-family: 'Lato', sans-serif;
+}

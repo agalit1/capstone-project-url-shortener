@@ -2,7 +2,6 @@ package shortify.backend.utility;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -14,6 +13,8 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import shortify.backend.model.AppUser;
 import shortify.backend.service.AppUserService;
+
+import java.util.List;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -29,18 +30,17 @@ public class SecurityConfig {
                 .csrf().disable()
                 .httpBasic().and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,
-                        "/**")
-                .permitAll()
-                .antMatchers(HttpMethod.POST,
-                        "/api/users/signup", "/api/links"
+                .antMatchers("/api/users/login")
+                .authenticated()
+                .antMatchers("/api/users/signup", "/api/links"
                 )
                 .permitAll()
-                .antMatchers(HttpMethod.GET,
-                        "/api/users/login")
+                .antMatchers("/**")
+                .permitAll()
+                .anyRequest()
                 .authenticated()
-                .anyRequest().denyAll()
-                .and().build();
+                .and()
+                .build();
     }
 
     @Bean
@@ -60,9 +60,11 @@ public class SecurityConfig {
                     throw new UsernameNotFoundException("Invalid email or password");
                 }
                 return User.builder()
-                        .username(appUser.username())
+                        .username(appUser.email())
                         .password(appUser.password())
+                        .authorities(List.of())
                         .build();
+
             }
 
             @Override

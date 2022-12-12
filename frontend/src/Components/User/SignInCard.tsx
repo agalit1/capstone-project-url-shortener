@@ -1,45 +1,42 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import axios from "axios";
 import {Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography} from "@mui/material";
 import LockPersonOutlinedIcon from '@mui/icons-material/LockPersonOutlined';
 import {NavLink} from "react-router-dom";
-import {InferType, object, string} from "yup";
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
-
-const signInSchema = object({
-    email: string()
-        .email("Invalid email")
-        .required("Email is required"),
-    password: string()
-        .required("Password is required"),
-})
-
-type Props = InferType<typeof signInSchema>;
 
 function SignInCard() {
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [success, setSuccess] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>("");
 
-    const onSubmit = (values: Props) => {
-        axios.post("/api/users/login", values)
+    const login = () => {
+        axios.post("/api/users/login", {
+            auth: {
+                username: email,
+                password: password
+            }
+        })
             .then((response) => {
                 setSuccess(true)
             })
             .catch((err) => {
                 if (err.response?.status === 401) {
-                    setErrorMessage("Sign in failed")
+                    setErrorMessage("Invalid credentials")
+                } else {
+                    setErrorMessage("Login failed")
                 }
             })
     }
 
-    const {
-        handleSubmit,
-        formState: {errors},
-    } = useForm<Props>({
-        resolver: yupResolver(signInSchema),
-    });
+    const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        login();
+        setEmail("");
+        setPassword("");
+    }
+
 
     return (
         <Container component="main" maxWidth="xs">
@@ -67,7 +64,7 @@ function SignInCard() {
                         <Typography component="h1" variant="h5">
                             Sign In
                         </Typography>
-                        <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 1}}>
+                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}} autoComplete="off">
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
                                     <TextField
@@ -77,10 +74,8 @@ function SignInCard() {
                                         id="email"
                                         label="Email Address"
                                         name="email"
-                                        autoComplete="email"
                                         autoFocus
                                     />
-                                    <span className="error">{errors?.email?.message}</span>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
@@ -91,11 +86,10 @@ function SignInCard() {
                                         label="Password"
                                         type="password"
                                         id="password"
-                                        autoComplete="current-password"
                                     />
-                                    <span className="error">{errors?.password?.message}</span>
                                 </Grid>
                             </Grid>
+                            {errorMessage}
                             <Button
                                 type="submit"
                                 fullWidth
