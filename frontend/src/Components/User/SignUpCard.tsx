@@ -1,12 +1,23 @@
 import React, {useState} from 'react';
-import {Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography,} from "@mui/material";
+import {
+    Alert,
+    AlertTitle,
+    Avatar,
+    Box,
+    Button,
+    Container,
+    CssBaseline,
+    Grid,
+    TextField,
+    Typography,
+} from "@mui/material";
 import LockPersonOutlinedIcon from '@mui/icons-material/LockPersonOutlined';
 import axios from "axios";
 import * as yup from 'yup';
 import {InferType, object, string} from 'yup';
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
-import {NavLink} from "react-router-dom";
+import {Link as RouterLink} from "react-router-dom";
 
 
 const signUpSchema = object({
@@ -38,7 +49,8 @@ function SignUpCard() {
             })
             .catch((err) => {
                 if (err.response?.status === 400) {
-                    setErrorMessage("Email already in use")
+                    let responseMsg = err.response?.data?.message;
+                    setErrorMessage(responseMsg ? responseMsg : "Registration failed");
                 } else {
                     setErrorMessage("Registration failed")
                 }
@@ -57,15 +69,27 @@ function SignUpCard() {
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
             {success ? (
-                <div className="successMessage">
-                    <h1>Registration successful</h1>
-                    <p>
-                        <NavLink to="/login">Sign in</NavLink>
-                    </p>
+                <div>
+                    <Alert severity="success">
+                        <AlertTitle>Success</AlertTitle>
+                        <strong>Registration successful</strong>
+                    </Alert>
+                    <Grid container justifyContent="flex-end">
+                        <Grid item>
+                            <RouterLink to="/login">Sign in</RouterLink>
+                        </Grid>
+                    </Grid>
                 </div>
             ) : (
                 <div>
-                    <p className="errorMessage">{errorMessage}</p>
+                    {
+                        errorMessage.length > 0 &&
+                        <Alert severity="error">
+                            <AlertTitle>Error</AlertTitle>
+                            {errorMessage}
+                        </Alert>
+                    }
+
                     <Box
                         sx={{
                             display: 'flex',
@@ -136,9 +160,9 @@ function SignUpCard() {
                             </Button>
                             <Grid container justifyContent="flex-end">
                                 <Grid item>
-                                    <NavLink to="/login">
+                                    <RouterLink to="/login">
                                         {"Already have an account? Sign in"}
-                                    </NavLink>
+                                    </RouterLink>
                                 </Grid>
                             </Grid>
                         </Box>

@@ -12,13 +12,17 @@ function SignInCard() {
     const [errorMessage, setErrorMessage] = useState<string>("");
 
     const login = () => {
-        axios.post("/api/users/login", {
+        console.log(email);
+        console.log(password);
+
+        axios.post("/api/users/login", {}, {
             auth: {
                 username: email,
                 password: password
             }
         })
             .then((response) => {
+                console.log(response);
                 setSuccess(true)
             })
             .catch((err) => {
@@ -28,6 +32,14 @@ function SignInCard() {
                     setErrorMessage("Login failed")
                 }
             })
+    }
+
+    function handleEmail(e: ChangeEvent<HTMLInputElement>) {
+        setEmail(e.target.value);
+    }
+
+    function handlePassword(e: ChangeEvent<HTMLInputElement>) {
+        setPassword(e.target.value);
     }
 
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
@@ -75,6 +87,7 @@ function SignInCard() {
                                         label="Email Address"
                                         name="email"
                                         autoFocus
+                                        onChange={handleEmail}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -86,10 +99,10 @@ function SignInCard() {
                                         label="Password"
                                         type="password"
                                         id="password"
+                                        onChange={handlePassword}
                                     />
                                 </Grid>
                             </Grid>
-                            {errorMessage}
                             <Button
                                 type="submit"
                                 fullWidth
