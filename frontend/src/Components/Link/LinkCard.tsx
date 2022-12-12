@@ -2,6 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import axios from "axios";
 import isURL from "validator/lib/isURL";
 import LinkResult from "./LinkResult";
+import {Box, Container, CssBaseline, Grid, TextField} from "@mui/material";
 
 function LinkCard() {
 
@@ -33,18 +34,29 @@ function LinkCard() {
     }
 
     return (
-        <form className="inputContainer" onSubmit={handleSubmit}>
-            <div>
-                <input type="text"
-                       placeholder="Enter your url"
-                       onChange={(e) => setPostLongLink(e.target.value)}
-                       value={postLongLink}/>
-                <button>
-                    Shorten
-                </button>
-            </div>
-            <LinkResult shortLink={shortLink}/>
-        </form>
+        <Container component="main" maxWidth="xs">
+            <CssBaseline/>
+            <form className="inputContainer" onSubmit={handleSubmit}>
+                <Box sx={{mt: 4}}>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                type="text"
+                                placeholder="Enter your url"
+                                onChange={(e) => setPostLongLink(e.target.value)}
+                                value={postLongLink}/>
+                        </Grid>
+                    </Grid>
+                    <button
+                        type="submit">
+                        Shorten
+                    </button>
+                </Box>
+                <LinkResult shortLink={shortLink}/>
+            </form>
+        </Container>
+
     )
 }
 

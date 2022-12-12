@@ -7,7 +7,8 @@ import BackgroundAnimate from "./Components/Link/BackgroundAnimate";
 import SignUpCard from "./Components/User/SignUpCard";
 import SignInCard from "./Components/User/SignInCard";
 import ApplicationBar from "./Components/Navigation/ApplicationBar";
-import Footer from "./Footer";
+import Footer from "./Components/Navigation/Footer";
+import React from "react";
 
 
 function App() {
@@ -21,14 +22,16 @@ function App() {
                     URL <span className="title">Shortener</span>
                     <p className="slogan">Shortify - the shorter the better.</p>
                 </Typography>
+                <BackgroundAnimate/>
                 <Routes>
                     <Route path='/' element={<LinkCard/>}/>
                     <Route path='/signup' element={<SignUpCard/>}/>
                     <Route path='/login' element={<SignInCard/>}/>
                 </Routes>
+
                 <Footer/>
-                <BackgroundAnimate/>
             </div>
+
         </>
     )
 }
