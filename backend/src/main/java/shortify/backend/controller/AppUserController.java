@@ -24,7 +24,6 @@ public class AppUserController {
     }
 
     @PostMapping("/login")
-    public String login() {
-        return "login";
+    public void login() {
     }
 }
