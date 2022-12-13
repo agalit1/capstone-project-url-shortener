@@ -2,6 +2,7 @@ package shortify.backend.security;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.server.ResponseStatusException;
 import shortify.backend.model.AppUser;
 import shortify.backend.model.UserSignUpDTO;
 import shortify.backend.repository.AppUserRepository;
@@ -9,10 +10,11 @@ import shortify.backend.service.AppUserService;
 import shortify.backend.utility.UuidGenerator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AppUserServiceTest {
+class AppUserServiceTest {
 
     private final AppUserRepository appUserRepository = mock(AppUserRepository.class);
 
@@ -56,5 +58,22 @@ public class AppUserServiceTest {
         // Then
 
         assertEquals(appUser, actual);
+    }
+
+    @Test
+    void checkIfUserExistsByEmailAndIfNotFoundExpectBadRequest() {
+
+        // Given
+
+        UserSignUpDTO userSignUpDTO = new UserSignUpDTO("test", "test@test.com", passwordEncoder.encode("abC1234!"), "abC1234!");
+
+        // When
+
+        when(appUserRepository.existsByEmail(userSignUpDTO.email())).thenThrow(ResponseStatusException.class);
+
+        // Then
+
+        assertThrows(ResponseStatusException.class,
+                () -> appUserService.saveUser(userSignUpDTO));
     }
 }
