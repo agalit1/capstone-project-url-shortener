@@ -1,38 +1,75 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {CopyToClipboard} from "react-copy-to-clipboard";
-import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+import {Card, CardContent, Typography} from "@mui/material";
 
-type Props = {
+type LinkResultProps = {
+    longLink: string;
     shortLink: string;
 }
 
-const LinkResult = (props: Props) => {
+type LinkResultState = {
+    buttonText: string
+};
 
-    const [copied, setCopied] = useState(false);
+class LinkResult extends React.Component<LinkResultProps, LinkResultState> {
+    constructor(props: LinkResultProps) {
+        super(props);
+        this.state = {
+            buttonText: "Copy"
+        }
+    }
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setCopied(false);
-        }, 1000);
+    handleCopy(copied: boolean) {
+        if (copied) {
+            // Make changes to button
+            this.setState({
+                buttonText: "Copied ✓"
+            });
+            // Reset button in 1s
+            setTimeout(() => {
+                this.handleCopy(false);
+            }, 1000);
+        } else {
+            // Make changes to button
+            this.setState({
+                buttonText: "Copy"
+            });
+        }
+    }
 
-        return () => clearTimeout(timer);
-    }, [copied]);
+    render() {
+        if (!this.props.shortLink) {
+            return null;
+        }
 
-    return (
-        <>
-            {props.shortLink && (
-                <div className="result">
-                    <p>{props.shortLink}</p>
+        return (
+            <Card>
+                <CardContent className="link-result-card-container">
+                    <div className="long-link-container">
+                        <Typography className="long-link-text">
+                            {this.props.longLink}
+                        </Typography>
+
+                    </div>
+
+                    <div className="short-link-container">
+                        <Typography>
+                            <a href={"http://" + this.props.shortLink} target="_blank" rel="noreferrer">
+                                {this.props.shortLink}
+                            </a>
+                        </Typography>
+                    </div>
+
                     <CopyToClipboard
-                        text={props.shortLink}
-                        onCopy={() => setCopied(true)}
+                        text={this.props.shortLink}
+                        onCopy={() => this.handleCopy(true)}
                     >
-                        <button className={copied ? "copied" : ""}>Copy</button>
+                        <button className="button button-copy">{this.state.buttonText}</button>
                     </CopyToClipboard>
-                    {copied ? <span className="copied"><CheckRoundedIcon/></span> : null}
-                </div>
-            )}
-        </>
-    )
+                </CardContent>
+            </Card>
+        );
+    }
 }
+
 export default LinkResult;

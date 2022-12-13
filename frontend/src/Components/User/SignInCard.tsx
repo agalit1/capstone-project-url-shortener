@@ -62,7 +62,9 @@ function SignInCard() {
                 </div>
             ) : (
                 <div>
-                    <p>{errorMessage}</p>
+                    {
+                        errorMessage.length > 0 && <p>{errorMessage}</p>
+                    }
                     <Box
                         sx={{
                             display: 'flex',
