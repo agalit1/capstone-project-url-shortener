@@ -40,21 +40,21 @@ public class AppUserServiceTest {
         assertEquals(appUser, actual);
     }
 
-//    @Test
-//    void searchAppUserByEmailAndExpectFoundAppUser() {
-//
-//        // Given
-//
-//        UserSignUpDTO userSignUpDTO = new UserSignUpDTO("test", "test@test.com", passwordEncoder.encode("abC1234!"), "abC1234!");
-//        AppUser appUser = new AppUser(uuidGenerator.generateUUID(), userSignUpDTO.username(), userSignUpDTO.email(), userSignUpDTO.password());
-//
-//        // When
-//
-//        when(appUserRepository.findAppUserByEmail(appUser.email())).thenReturn(appUser);
-//        AppUser actual = appUserService.findAppUserByEmail(appUser.email());
-//
-//        // Then
-//
-//        assertEquals(appUser, actual);
-//    }
+    @Test
+    void searchAppUserByEmailAndExpectFoundAppUser() {
+
+        // Given
+
+        UserSignUpDTO userSignUpDTO = new UserSignUpDTO("test", "test@test.com", passwordEncoder.encode("abC1234!"), "abC1234!");
+        AppUser appUser = new AppUser(uuidGenerator.generateUUID(), userSignUpDTO.username(), userSignUpDTO.email(), userSignUpDTO.password());
+
+        // When
+
+        when(appUserRepository.findAppUserByEmail(appUser.email())).thenReturn(appUser);
+        AppUser actual = appUserService.findAppUserByEmail(appUser.email());
+
+        // Then
+
+        assertEquals(appUser, actual);
+    }
 }
