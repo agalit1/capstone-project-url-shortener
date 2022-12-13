@@ -3,7 +3,7 @@ import axios from "axios";
 import isURL from "validator/lib/isURL";
 import LinkResult from "./LinkResult";
 import {Alert, AlertTitle, Card, CardContent, Container, CssBaseline, Stack, TextField} from "@mui/material";
-import {ShortenLinkResult} from "./Model";
+import {ShortenLinkResult} from "./ShortenLinkResult";
 
 type LinkPageProps = {};
 
