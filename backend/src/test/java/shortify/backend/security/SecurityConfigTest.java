@@ -1,29 +1,48 @@
 package shortify.backend.security;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import shortify.backend.model.AppUser;
+import shortify.backend.model.UserSignUpDTO;
+import shortify.backend.service.AppUserService;
+import shortify.backend.utility.SecurityConfig;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class SecurityConfigTest {
 
-    @Autowired
-    MockMvc mockMvc;
+
+    private final AppUserService appUserService = mock(AppUserService.class);
 
     @Test
-    @WithMockUser("custom@mail.com")
-    void createAppUserDetailsExpectStatus_Ok() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/users/login")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+    void createUserDetails() {
+
+        // Given
+
+        String id = "123";
+        String encodedPassword = "$2a$12$EdmNbHOU0tuhm0jIDUnkp.SJnpsIA0uCR5yo/zgbJ9HqwCvbWrdCK";
+        UserSignUpDTO userSignUpDTO = new UserSignUpDTO("test", "test@test.com", "abC1234!", "abC1234!");
+        AppUser appUser = new AppUser(id, userSignUpDTO.username(), userSignUpDTO.email(), encodedPassword);
+
+        // When
+
+        SecurityConfig securityConfig = new SecurityConfig(appUserService);
+        when(appUserService.findAppUserByEmail(appUser.email())).thenReturn(appUser);
+
+        String actual = securityConfig.userDetailsManager()
+                .loadUserByUsername(appUser.email())
+                .getPassword();
+
+        // Then
+
+        assertEquals(encodedPassword, actual);
+
     }
+
 }
