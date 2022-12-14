@@ -1,6 +1,7 @@
 package shortify.backend.user;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 import shortify.backend.model.AppUser;
@@ -61,7 +62,7 @@ class AppUserServiceTest {
     }
 
     @Test
-    void checkIfUserExistsByEmailAndIfNotFoundExpectBadRequest() {
+    void checkIfUserExistsByEmailAndIfNotFoundExpectResponseStatusException() {
 
         // Given
 
@@ -69,7 +70,7 @@ class AppUserServiceTest {
 
         // When
 
-        when(appUserRepository.existsByEmail(userSignUpDTO.email())).thenThrow(ResponseStatusException.class);
+        when(appUserRepository.existsByEmail(userSignUpDTO.email())).thenThrow(new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
         // Then
 
