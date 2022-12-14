@@ -34,4 +34,20 @@ class AppUserIntegrationTest {
                                 """))
                 .andExpect(status().isOk());
     }
+
+    @DirtiesContext
+    @Test
+    void createAppUserAndExpectIsBadRequestResponse() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/api/users/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(""" 
+                                    {
+                                       "username": "test",
+                                       "email": "testtest.com",
+                                       "password": "abcD1234!",
+                                       "confirmPassword": "abcD1234!"
+                                    }
+                                """))
+                .andExpect(status().isBadRequest());
+    }
 }
