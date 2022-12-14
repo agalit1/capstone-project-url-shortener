@@ -1,4 +1,4 @@
-package shortify.backend.security;
+package shortify.backend.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.password.PasswordEncoder;
