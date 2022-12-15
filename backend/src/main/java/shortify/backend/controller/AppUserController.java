@@ -32,5 +32,6 @@ public class AppUserController {
 
     @PostMapping("/login")
     public void login() {
+        throw new UnsupportedOperationException();
     }
 }

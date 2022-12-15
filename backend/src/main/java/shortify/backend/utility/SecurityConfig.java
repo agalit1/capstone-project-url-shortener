@@ -2,6 +2,7 @@ package shortify.backend.utility;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import shortify.backend.model.AppUser;
 import shortify.backend.service.AppUserService;
 
@@ -23,7 +25,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf().disable()
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
                 .httpBasic().and()
                 .authorizeRequests()
                 .antMatchers("/api/users/login")
@@ -35,6 +38,7 @@ public class SecurityConfig {
                 .permitAll()
                 .anyRequest()
                 .authenticated()
+                .antMatchers(HttpMethod.GET, "/", "/static/**", "/index.html", "/register").permitAll()
                 .and()
                 .build();
     }
