@@ -102,15 +102,10 @@ class LinkPage extends React.Component<LinkPageProps, LinkPageState> {
                             return <LinkResult longLink={slr.longLink} shortLink={slr.shortLink}/>
                         })
                     }
-
-                    {/*<LinkResult shortLink={this.state.shortLink}/>*/}
-                    {/*<LinkResult longLink={this.state.postLongLink}*/}
-                    {/*    shortLink={this.state.shortLink}/>*/}
                 </Stack>
             </Container>
 
         )
     }
-
 }
 export default LinkPage;
