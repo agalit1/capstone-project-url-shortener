@@ -2,15 +2,18 @@ import React from 'react';
 import {AppBar, Box, CssBaseline, Toolbar, Typography} from "@mui/material";
 import {Link} from "@mui/icons-material";
 import {Link as RouterLink} from "react-router-dom";
+import AuthContext from "../Context/AuthContext";
 
-type AppBarProps = {
-    isLoggedIn: boolean
-};
+type AppBarProps = {};
 type AppBarState = {};
 
 class ApplicationBar extends React.Component<AppBarProps, AppBarState> {
+    static contextType = AuthContext;
+
+
     render() {
-        const isLoggedIn = this.props.isLoggedIn;
+        const Auth: any = this.context;
+        const isLoggedIn = Auth.userIsAuthenticated();
 
         let routes;
         if (!isLoggedIn) {
@@ -40,7 +43,7 @@ class ApplicationBar extends React.Component<AppBarProps, AppBarState> {
                     </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to='/signout'>
+                    <RouterLink to='/' onClick={() => Auth.userLogout()}>
                         <Typography variant="h6" component="div" fontFamily='Lato'>
                             Sign Out
                         </Typography>

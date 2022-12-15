@@ -124,7 +124,8 @@
 .error {
     margin-left: auto;
     display: flex;
-    color: red
+    color: red;
+    font-family: 'Lato', sans-serif;
 }
 
 .signup nav {
@@ -181,4 +182,10 @@
 .successMessage {
     color: green;
     font-family: 'Lato', sans-serif;
+}
+
+.app-background {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #ffffff 10px), repeating-linear-gradient(#f2f2f255, #f2f2f2);
 }
