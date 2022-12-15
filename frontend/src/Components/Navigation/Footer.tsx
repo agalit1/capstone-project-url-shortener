@@ -7,8 +7,6 @@ function Footer() {
 
         <Box
             textAlign="center"
-            // pt={{xs: 5, sm: 10}}
-            // pb={{xs: 5, sm: 0}}
             sx={{
                 flexShrink: 0,
                 height: '50px',
