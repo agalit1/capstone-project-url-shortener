@@ -5,6 +5,7 @@ import {
     Avatar,
     Box,
     Button,
+    Card,
     Container,
     CssBaseline,
     Grid,
@@ -66,17 +67,18 @@ function SignUpCard() {
     });
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline/>
-            {success ? (
-                <div>
-                    <Alert severity="success">
-                        <AlertTitle>Success</AlertTitle>
-                        <strong>Registration successful</strong>
-                    </Alert>
-                    <Grid container justifyContent="flex-end">
-                        <Grid item>
-                            <RouterLink to="/login">Sign in</RouterLink>
+        <Card>
+            <Container maxWidth="xs" sx={{p: 2}}>
+                <CssBaseline/>
+                {success ? (
+                    <div>
+                        <Alert severity="success">
+                            <AlertTitle>Success</AlertTitle>
+                            <strong>Registration successful</strong>
+                        </Alert>
+                        <Grid container justifyContent="flex-end">
+                            <Grid item>
+                                <RouterLink to="/login">Sign in</RouterLink>
                         </Grid>
                     </Grid>
                 </div>
@@ -168,8 +170,9 @@ function SignUpCard() {
                         </Box>
                     </Box>
                 </div>
-            )}
-        </Container>
+                )}
+            </Container>
+        </Card>
     );
 }
 

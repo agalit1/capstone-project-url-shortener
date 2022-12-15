@@ -1,6 +1,5 @@
 import React from 'react';
 import {Box, Typography} from "@mui/material";
-import BackgroundAnimate from "../Link/BackgroundAnimate";
 import {Route, Routes} from "react-router-dom";
 import LinkPage from "../Link/LinkPage";
 import SignUpCard from "../User/SignUpCard";
@@ -24,7 +23,6 @@ function Content() {
                 URL <span className="title">Shortener</span>
                 <p className="slogan">Shortify - the shorter the better.</p>
             </Typography>
-            <BackgroundAnimate/>
             <Routes>
                 <Route path='/' element={<LinkPage/>}/>
                 <Route path='/signup' element={<SignUpCard/>}/>
