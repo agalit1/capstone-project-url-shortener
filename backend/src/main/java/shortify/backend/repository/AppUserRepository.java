@@ -8,7 +8,5 @@ import shortify.backend.model.AppUser;
 public interface AppUserRepository extends MongoRepository<AppUser, String> {
    AppUser findAppUserByEmail(String email);
 
-   AppUser findAppUserByUsername(String name);
-
    boolean existsByEmail(String email);
 }

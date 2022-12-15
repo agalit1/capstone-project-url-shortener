@@ -42,7 +42,5 @@ class SecurityConfigTest {
         // Then
 
         assertEquals(encodedPassword, actual);
-
     }
-
 }
