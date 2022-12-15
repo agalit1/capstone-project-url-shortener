@@ -89,16 +89,6 @@
     border: none;
     font-family: 'Lato', sans-serif;
     font-size: 0.8rem;
-    /*text-align: center;*/
-    /*text-transform: uppercase;*/
-    /*font-weight: bold;*/
-    /*border-top-right-radius: 3px;*/
-    /*border-bottom-right-radius: 3px;*/
-    /*color: #fff;*/
-    /*cursor: pointer;*/
-    /*background: var(--primary-color);*/
-    /*border: none;*/
-    /*padding: 0.5rem 1rem;*/
 }
 
 .result button.copied {
@@ -166,14 +156,6 @@
 .copied {
     color: #BB86FC;
 }
-
-/*.footer {*/
-/*    font-family: 'Lato', sans-serif;*/
-/*    flex-shrink: 0;*/
-/*    bottom: 30px;*/
-/*    color: gray;*/
-/*    width: 100%;*/
-/*}*/
 
 .errorMessage {
     color: red;

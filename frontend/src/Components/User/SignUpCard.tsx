@@ -175,6 +175,4 @@ function SignUpCard() {
         </Card>
     );
 }
-
-
 export default SignUpCard;

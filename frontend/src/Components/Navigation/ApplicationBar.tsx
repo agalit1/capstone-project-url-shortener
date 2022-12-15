@@ -10,7 +10,6 @@ type AppBarState = {};
 class ApplicationBar extends React.Component<AppBarProps, AppBarState> {
     static contextType = AuthContext;
 
-
     render() {
         const Auth: any = this.context;
         const isLoggedIn = Auth.userIsAuthenticated();
@@ -89,5 +88,4 @@ class ApplicationBar extends React.Component<AppBarProps, AppBarState> {
         );
     }
 }
-
 export default ApplicationBar;

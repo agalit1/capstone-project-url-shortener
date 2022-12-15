@@ -113,5 +113,4 @@ class LinkPage extends React.Component<LinkPageProps, LinkPageState> {
     }
 
 }
-
 export default LinkPage;

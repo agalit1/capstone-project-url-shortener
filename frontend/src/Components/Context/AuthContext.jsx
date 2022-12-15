@@ -50,5 +50,4 @@ export default AuthContext
 export function useAuth() {
     return useContext(AuthContext)
 }
-
 export {AuthProvider}

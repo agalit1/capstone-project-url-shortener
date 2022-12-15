@@ -31,5 +31,4 @@ function Content() {
         </Box>
     );
 }
-
 export default Content;
