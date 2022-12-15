@@ -36,9 +36,9 @@ public class SecurityConfig {
                 .permitAll()
                 .antMatchers("/**")
                 .permitAll()
+                .antMatchers(HttpMethod.GET, "/", "/static/**", "/index.html", "/register").permitAll()
                 .anyRequest()
                 .authenticated()
-                .antMatchers(HttpMethod.GET, "/", "/static/**", "/index.html", "/register").permitAll()
                 .and()
                 .build();
     }
