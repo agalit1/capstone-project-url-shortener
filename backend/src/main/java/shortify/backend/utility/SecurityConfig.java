@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import shortify.backend.model.AppUser;
 import shortify.backend.service.AppUserService;
 
@@ -24,23 +23,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+        http.csrf().disable();
+        http
+                .httpBasic()
                 .and()
-                .httpBasic().and()
                 .authorizeRequests()
-                .antMatchers("/api/users/login")
-                .authenticated()
-                .antMatchers("/api/users/signup", "/api/links"
-                )
-                .permitAll()
-                .antMatchers("/**")
-                .permitAll()
-                .antMatchers(HttpMethod.GET, "/", "/static/**", "/index.html", "/register").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .build();
+                .antMatchers("/api/users/login").authenticated()
+                .antMatchers(HttpMethod.GET, "/", "/static/**", "/index.html").permitAll();
+        return http.build();
     }
 
     @Bean
