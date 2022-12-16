@@ -20,7 +20,7 @@ public class RedirectController {
         this.linkService = linkService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{id:\\w{4}}")
     public ModelAndView redirectView(@PathVariable String id, ModelMap model) {
         String redirectUrl;
         try {
