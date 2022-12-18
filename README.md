@@ -1,7 +1,7 @@
 <h1 align="center">Shortify - URL Shortener</h1>
 <p align="center">This application is a tool that turns a long URL into a short, unique URL, but still redirect a user to the desired web page.</p>
 
-https://user-images.githubusercontent.com/114018652/208325295-2e90b06d-9101-4631-80fd-67a4abc3306b.mp4
+https://user-images.githubusercontent.com/114018652/208325378-ae9c69dd-a569-4bd0-a7db-15d2a643bd8b.mp4
 
 ---
 
