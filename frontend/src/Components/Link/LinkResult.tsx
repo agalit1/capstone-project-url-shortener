@@ -21,16 +21,13 @@ class LinkResult extends React.Component<LinkResultProps, LinkResultState> {
 
     handleCopy(copied: boolean) {
         if (copied) {
-            // Make changes to button
             this.setState({
                 buttonText: "Copied ✓"
             });
-            // Reset button in 1s
             setTimeout(() => {
                 this.handleCopy(false);
             }, 1000);
         } else {
-            // Make changes to button
             this.setState({
                 buttonText: "Copy"
             });
