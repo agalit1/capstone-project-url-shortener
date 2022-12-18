@@ -1,6 +1,8 @@
 <h1 align="center">Shortify - URL Shortener</h1>
 <p align="center">This application is a tool that turns a long URL into a short, unique URL, but still redirect a user to the desired web page.</p>
 
+https://user-images.githubusercontent.com/114018652/208325295-2e90b06d-9101-4631-80fd-67a4abc3306b.mp4
+
 ---
 
 ## Setup
@@ -23,6 +25,3 @@ Open http://localhost:3000 to access it.
 * MongoDB
 * MUI
 * Fly.io
-
-
-
