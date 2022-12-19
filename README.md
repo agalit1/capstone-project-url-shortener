@@ -7,7 +7,7 @@ https://user-images.githubusercontent.com/114018652/208325378-ae9c69dd-a569-4bd0
 
 ## Setup for backend
 
-Run the following Maven command to start the application: ./mvnw clean spring-boot:run
+Run the following Maven command to start the application: ./mvnw clean spring-boot:run.
 The application expects a MongoDB database at localhost:27017 by default. 
 Open http://localhost:8080 to access the application.
 
